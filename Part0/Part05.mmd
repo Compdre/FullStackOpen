@@ -1,0 +1,29 @@
+sequenceDiagram
+    title 0.5 Usuario accede a aplicación de una sola página
+
+    participant Navegador
+    participant Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Servidor
+    Servidor-->>Navegador: Documento HTML
+    deactivate Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Servidor
+    Servidor-->>Navegador: Archivo CSS
+    deactivate Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate Servidor
+    Servidor-->>Navegador: Aplicación JavaScript 
+    deactivate Servidor
+
+    Note right of Navegador: El Navegador inicia la ejecución del código JavaScript que recupera el JSON desde el Servidor.
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Servidor
+    Servidor-->>Navegador: [{ "content": "web development","date": "2024-08-30T18:30:38.298Z" }, ... ]
+    deactivate Servidor
+
+    Note right of Navegador: El Navegador ejecuta la función callback que renderiza las notas

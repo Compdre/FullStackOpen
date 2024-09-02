@@ -1,0 +1,12 @@
+sequenceDiagram
+    title 0.6 El Usuario crea nota en versión de una sola página
+
+    participant Navegador
+    participant Servidor
+
+    Navegador->>Servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate Servidor
+    Servidor-->>Navegador: Documento HTML
+    deactivate Servidor
+
+    Note left of Servidor: Servidor confirma grabación. Naveagador renderiza página con la nueva nota.

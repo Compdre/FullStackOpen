@@ -1,0 +1,36 @@
+sequenceDiagram
+    title 0.4 usuario crea una nueva nota en la página
+
+    participant Navegador
+    participant Servidor
+
+    Navegador->>Servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate Servidor
+    Servidor-->>Navegador: Documento HTML
+    deactivate Servidor
+
+    Note left of Servidor: El Servidor confirma grabación y solicita al Naveagador llamar nuevamente /notes.
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Servidor
+    Servidor-->>Navegador: Documento HTML
+    deactivate Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Servidor
+    Servidor-->>Navegador: Archivo CSS
+    deactivate Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Servidor
+    Servidor-->>Navegador: Archivo JavaScript 
+    deactivate Servidor
+
+    Note right of Navegador: El Navegador inicia la ejecución del código JavaScript que recupera el JSON desde el Servidor.
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Servidor
+    Servidor-->>Navegador: [{ "content": "web development","date": "2024-08-30T18:30:38.298Z" }, ... ]
+    deactivate Servidor
+
+    Note right of Navegador: El Navegador ejecuta la función callback que renderiza las notas
